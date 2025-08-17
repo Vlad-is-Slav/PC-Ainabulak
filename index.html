@@ -15,6 +15,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
+    /* Preloader */
+#preloader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2000;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+#preloader .logo {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  margin-bottom: 16px;
+  animation: pulse 1.5s infinite;
+}
+#preloader p {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 18px;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
     :root {
       --bg: #f9f9fb;
       --text: #222;
@@ -180,6 +220,11 @@
   </style>
 </head>
 <body>
+  <div id="preloader">
+  <div class="logo"></div>
+  <p>Загрузка...</p>
+</div>
+
   <a class="skip-link" href="#main">Перейти к содержимому</a>
 
   <header>
@@ -215,8 +260,8 @@
   <main id="main">
     <section class="hero visible" aria-label="Вступительный блок">
       <div class="container hero-inner">
-        <h1>Сборка и настройка ПК</h1>
-        <p>Windows, Office, драйверы, программы и игры — быстро, надёжно и с гарантией. Работаем в Айнабулаке и по Алматы.</p>
+        <h1>Сборка, настройка ПК и Ноутбуков</h1>
+        <p>Windows, Office, драйверы, программы и игры — быстро, надёжно и с гарантией. Работаем в Айнабулаке и Кулагере.</p>
         <div class="hero-cta">
           <a class="btn" href="#form">Оставить заявку</a>
           <a class="btn outline" href="#services">Посмотреть услуги</a>
@@ -239,19 +284,19 @@
           <article class="service-card" aria-label="Установка Windows">
             <i class="fa-brands fa-windows" aria-hidden="true"></i>
             <h3>Установка Windows</h3>
-            <p>Чистая установка Windows 7/8.1/10/11, драйверы, обновления, базовая оптимизация и настройка.</p>
+            <p>Чистая установка Windows 7/8.1/10/11, драйвера, обновления, базовая настройка и активация.</p>
           </article>
 
           <article class="service-card" aria-label="Установка Microsoft Office">
             <i class="fa-regular fa-file-word" aria-hidden="true"></i>
             <h3>Microsoft Office</h3>
-            <p>Установка и настройка Office 2010–2021, подключение OneDrive, шрифтов и шаблонов.</p>
+            <p>Установка и настройка Office 2010–2021 (активация).</p>
           </article>
 
           <article class="service-card" aria-label="Программы и игры">
             <i class="fas fa-gamepad" aria-hidden="true"></i>
             <h3>Программы и игры</h3>
-            <p>Устанавливаем нужные приложения, лаунчеры, популярные игры и сопутствующие библиотеки.</p> </article> </div> </div> </section>
+            <p>Устанавливаем нужные приложения, лаунчеры, популярные игры и многое другое.</p> </article> </div> </div> </section>
 
 
 <section id="form" aria-labelledby="form-title">
@@ -284,7 +329,8 @@
     <div class="container" style="text-align:center; margin-top:20px;">
       <p style="color:var(--muted); margin-bottom:12px;">Или напишите прямо сейчас:</p>
       <div class="contact-icons">
-        <a href="https://wa.me/77057173116" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"><i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> WhatsApp</a>
+        <a href="https://wa.me/77057173116" target="_blank" rel="noopener" aria-label="Написать Владиславу в WhatsApp"><i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> Владислав (Айнабулак)</a>
+      <a href="https://wa.me/77006934138" target="_blank" rel="noopener" aria-label="Написать Александру в WhatsApp"><i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> Александр (Кулагер)</a>      
       </div>
     </div>
 
@@ -301,17 +347,17 @@
 <section id="about" aria-labelledby="about-title">
   <div class="container about">
     <div class="image-wrap" aria-hidden="true">
-      <img src="dima.jpg" alt="Рабочее место сборки ПК" loading="lazy" />
+      <img src="dima.jpg" alt="Фото" loading="lazy" />
     </div>
     <div>
       <h2 id="about-title">О нашей компании</h2>
       <p>
-        Мы — команда специалистов из Айнабулака. Собираем, настраиваем и обслуживаем ПК для игр,
+        Мы — команда специалистов из Айнабулака и Кулагера. Собираем, настраиваем и обслуживаем ПК, а также ноутбуки для игр,
         работы, обучения и творчества. Помогаем с установкой Windows, драйверов, Office и нужных приложений.
       </p>
       <p>
         Подходим к каждому заказу индивидуально: объясняем варианты, показываем плюсы и минусы,
-        настраиваем так, чтобы компьютер радовал скоростью и стабильностью.
+        настраиваем так, чтобы устройство радовало скоростью и стабильностью.
       </p>
       <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
         <a class="btn" href="#services">Наши услуги</a>
@@ -326,10 +372,22 @@
     <h2 id="contacts-title" class="section-title">Свяжитесь с нами</h2>
     <p class="section-sub">Отвечаем быстро — обычно в течение 10 минут</p>
     <div class="contact-icons" style="margin-top:18px;">
-      <a href="https://wa.me/77057173116" target="_blank" rel="noopener" aria-label="Написать в WhatsApp"><i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> WhatsApp</a>
+      <a href="https://wa.me/77057173116" target="_blank" rel="noopener" aria-label="Написать Владиславу в WhatsApp"><i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> Владислав (Айнабулак)</a>
+      <a href="https://wa.me/77006934138" target="_blank" rel="noopener" aria-label="Написать Александру в WhatsApp"><i class="fa-brands fa-whatsapp" style="color:#22c55e"></i> Александр (Кулагер)</a>
     </div>
+
+    <!-- Карта -->
+    <!-- Карта с двумя точками -->
+  <div style="margin-top:30px; border-radius:16px; overflow:hidden; box-shadow:0 8px 22px rgba(0,0,0,0.1);">
+  <iframe 
+    src="https://www.google.com/maps/d/u/0/embed?mid=1ZJuoz4sdoDUcHKgo9MBwwvNN5IDJ8tg&ehbc=2E312F&noprof=1" 
+    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy">
+  </iframe>
+  </div>
+
   </div>
 </section>
+
 
   </main>
 
@@ -339,22 +397,20 @@
     </div>
   </footer>
 
-<button id="toTop" aria-label="Наверх">↑</button> <a id="whatsapp-float" href="https://wa.me/77057173116" target="_blank" rel="noopener"> <i class="fa-brands fa-whatsapp"></i> Написать </a>
+<button id="toTop" aria-label="Наверх">↑</button> <div id="whatsapp-float">
+  <i class="fa-brands fa-whatsapp"></i> Написать
+  <div id="whatsapp-menu" style="display:none; position:absolute; bottom:60px; right:0; background:#fff; color:#000; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,.25); overflow:hidden;">
+    <a href="https://wa.me/77057173116" target="_blank" style="display:block; padding:10px 14px; text-decoration:none; color:#000;">Владислав (Айнабулак)</a>
+    <a href="https://wa.me/77006934138" target="_blank" style="display:block; padding:10px 14px; text-decoration:none; color:#000;">Александр (Кулагер)</a>
+  </div>
+</div>
 
-  <!-- Schema.org -->
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ComputerRepair",
-    "name": "PC Ainabulak",
-    "description": "Сборка ПК, установка Windows и Office, настройка программ и игр в Айнабулаке и по Алматы.",
-    "areaServed": "Алматы",
-    "telephone": "+7 700 000 00 00"
-  }
-  </script>
-
-  <script>
+<script>
+  const waFloat = document.getElementById("whatsapp-float");
+  const waMenu = document.getElementById("whatsapp-menu");
+  waFloat.addEventListener("click", () => {
+    waMenu.style.display = waMenu.style.display === "none" ? "block" : "none";
+  });
     // Theme
     const body = document.body;
     const themeToggle = document.getElementById('themeToggle');
@@ -435,6 +491,14 @@
       });
     }, { threshold: 0.5 });
     counters.forEach(c => counterObserver.observe(c));
+    // Preloader
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  setTimeout(() => {
+    preloader.classList.add("hidden");
+  }, 600); // маленькая задержка для плавности
+});
+
   </script>
 
 </body>
