@@ -408,7 +408,24 @@
           <article class="service-card" aria-label="Программы и игры">
             <i class="fas fa-gamepad" aria-hidden="true"></i>
             <h3>Программы и игры</h3>
-            <p>Устанавливаем нужные приложения, лаунчеры, популярные игры и многое другое.</p> </article> </div> </div> </section>
+            <p>Устанавливаем нужные приложения, лаунчеры, популярные игры и многое другое.</p> 
+          </article> 
+        </div> 
+      </div> 
+    </section>
+
+<section id="promo" aria-labelledby="promo-title" style="background: linear-gradient(135deg, #1e3a8a, #4f46e5); color:#fff; border-radius:28px; margin:60px 0; padding:60px 20px; text-align:center; box-shadow:0 12px 30px rgba(0,0,0,.15);">
+  <div class="container">
+    <h2 id="promo-title" class="section-title" style="color:#fff;">🎄 Новогодняя акция!</h2>
+    <p class="section-sub" style="color:#f0f0f0; max-width:720px; margin:0 auto 28px;">
+      Только до <strong>15 января</strong> при заказе сборки ПК — установка Windows и Office <b>в подарок</b>!  
+      А также скидка <b>10%</b> на любые услуги.
+    </p>
+    <a href="#form" class="btn" style="font-size:18px;">Получить скидку</a>
+    <p id="countdown" style="font-size:20px;font-weight:600;margin-top:18px;"></p>
+  </div>
+</section>
+
 
 
 <section id="form" aria-labelledby="form-title">
@@ -493,6 +510,30 @@
 
   </div>
 </section>
+
+<!-- 🎄 Модальное окно акции -->
+<div id="promoModal" style="
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center;
+  z-index:2000; visibility:hidden; opacity:0; transition:opacity .3s;
+">
+  <div style="
+    background: linear-gradient(135deg,#1e3a8a,#4f46e5);
+    color:#fff; padding:40px; border-radius:20px; max-width:400px; text-align:center;
+    box-shadow:0 12px 30px rgba(0,0,0,.3); position:relative;
+  ">
+    <button onclick="closePromo()" style="
+      position:absolute; top:10px; right:14px; background:none; border:0; font-size:22px;
+      color:#fff; cursor:pointer;
+    ">&times;</button>
+    <h2 style="margin-bottom:16px;">🎄 Новогодняя акция!</h2>
+    <p style="margin-bottom:20px;">
+      При заказе сборки ПК — установка Windows и Office <b>в подарок</b>!  
+      Скидка <b>10%</b> на любые услуги до 15 января.
+    </p>
+    <a href="#form" class="btn" style="font-size:16px;" onclick="closePromo()">Получить скидку</a>
+  </div>
+</div>
 
 
   </main>
@@ -618,10 +659,69 @@ window.addEventListener("load", () => {
     createFlakes();
     let angle=0;
     function drawFlakes(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle="white";ctx.beginPath();for(let i=0;i<flakes.length;i++){let f=flakes[i];ctx.moveTo(f.x,f.y);ctx.arc(f.x,f.y,f.r,0,Math.PI*2,true);}ctx.fill();moveFlakes();}
-    function moveFlakes(){angle+=0.01;for(let i=0;i<flakes.length;i++){let f=flakes[i];f.y+=Math.pow(f.d,2)+1;f.x+=Math.sin(angle)*0.5;if(f.y>canvas.height){flakes[i]={x:Math.random()*canvas.width,y:0,r:f.r,d:f.d};}}}
+    function moveFlakes(){angle+=0.01;for(let i=0;i<flakes.length;i++){let f=flakes[i];f.y += (Math.pow(f.d,2) + 1) * 0.3;f.x+=Math.sin(angle)*0.5;if(f.y>canvas.height){flakes[i]={x:Math.random()*canvas.width,y:0,r:f.r,d:f.d};}}}
     function update(){drawFlakes();requestAnimationFrame(update);} update();
     canvas.style.cssText="position:fixed;top:0;left:0;pointer-events:none;z-index:1500;";
+
+    // Подарки
+const gifts = ["🎁","🎄","⭐"];
+function dropGift(){
+  const el = document.createElement("div");
+  el.textContent = gifts[Math.floor(Math.random()*gifts.length)];
+  el.style.cssText = `
+    position:fixed;top:-40px;left:${Math.random()*100}%;
+    font-size:${20+Math.random()*20}px;
+    animation:fallGift 6s linear forwards;
+    z-index:1600;pointer-events:none;`;
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),6000);
+}
+setInterval(dropGift, 5000);
+
+const style = document.createElement("style");
+style.textContent = `
+@keyframes fallGift {
+  0%{transform:translateY(0) rotate(0);}
+  100%{transform:translateY(110vh) rotate(360deg);opacity:0;}
+}`;
+document.head.appendChild(style);
+
+
   </script>
+  <script>
+  const promoModal = document.getElementById("promoModal");
+
+  function showPromo() {
+    promoModal.style.visibility = "visible";
+    promoModal.style.opacity = "1";
+  }
+  function closePromo() {
+    promoModal.style.opacity = "0";
+    setTimeout(()=> promoModal.style.visibility="hidden", 300);
+  }
+
+  // Показать через 2 секунды после захода
+  window.addEventListener("load", () => {
+    setTimeout(showPromo, 2000);
+  });
+</script>
+
+<script>// Countdown до 15 января
+const countdown = document.getElementById("countdown");
+const deadline = new Date("2026-01-31T23:59:59").getTime();
+setInterval(()=>{
+  const now = new Date().getTime();
+  const diff = deadline - now;
+  if(diff<=0){ countdown.textContent="Акция завершена 🎉"; return; }
+  const d = Math.floor(diff/(1000*60*60*24));
+  const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const m = Math.floor((diff%(1000*60*60))/(1000*60));
+  const s = Math.floor((diff%(1000*60))/1000);
+  countdown.textContent = `До конца акции: ${d}д ${h}ч ${m}м ${s}с`;
+},1000);
+</script>
+
+
 
 </body>
 </html>
